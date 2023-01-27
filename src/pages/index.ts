@@ -1,8 +1,8 @@
-import {Explore} from './Explore/Explore'
-import {ForgotPassword} from './ForgotPassword/ForgotPassword'
-import {Offers} from './Offers/Offers'
-import {SignIn} from './SignIn/SignIn'
-import { SignUp } from './SignUp/SignUp'
+import {Explore} from './Explore'
+import {ForgotPassword} from './ForgotPassword'
+import {Offers} from './Offers'
+import {SignIn} from './SignIn'
+import { SignUp } from './SignUp'
 
 export {
   Explore,
