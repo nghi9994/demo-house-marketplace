@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase.config'
 import {ReactComponent as ArrowRightIcon} from '../../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../../assets/svg/visibilityIcon.svg'
+import { toast } from 'react-toastify'
 
 export const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -33,6 +34,7 @@ export const SignIn = () => {
       }
     } catch (error) {
       console.log('🚀 ~ onSubmit ~ error', error);
+      toast.error('Bad User Credential')
     }
   }
 
