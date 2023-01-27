@@ -1,5 +1,7 @@
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { auth } from '../../firebase.config'
 import {ReactComponent as ArrowRightIcon} from '../../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../../assets/svg/visibilityIcon.svg'
 
@@ -20,6 +22,20 @@ export const SignIn = () => {
     }))
   }
 
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password)
+
+      if (userCredential?.user) {
+        navigate('/')
+      }
+    } catch (error) {
+      console.log('🚀 ~ onSubmit ~ error', error);
+    }
+  }
+
   return (
     <>
       <div className="pageContainer">
@@ -27,7 +43,7 @@ export const SignIn = () => {
           <p className="pageHeader">Welcome Back!</p>
         </header>
 
-        <form>
+        <form onSubmit={onSubmit}>
           <input type="email" className='emailInput' placeholder='Email' id="email" value={email} onChange={onChange} />
           <div className="passwordInputDiv">
             <input type={showPassword ? 'text' : 'password'} className='passwordInput' placeholder="Password" id="password" value={password} onChange={onChange} />
