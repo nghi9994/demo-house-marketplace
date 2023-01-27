@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import _ from 'lodash';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { doc, setDoc, serverTimestamp } from "firebase/firestore"; 
 import {auth, db} from '../../firebase.config'
 
 import {ReactComponent as ArrowRightIcon} from '../../assets/svg/keyboardArrowRightIcon.svg'
@@ -35,9 +37,13 @@ export const SignUp = () => {
         updateProfile(auth.currentUser, {
           displayName: name,
         })
-      }
+        const formDataCopy: any = _.omit(formData, "password")
+        formDataCopy.timestamp = serverTimestamp();
 
-      navigate('/')
+        // Save user to firestore
+        await setDoc(doc(db, 'users', user.uid), formDataCopy)
+        navigate('/')
+      }
     } catch (error) {
       console.log('🚀 ~ onSubmit ~ error', error);
     }
