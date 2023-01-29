@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Navbar, PrivateRoute } from './components';
-import { Explore, Offers, Profile, SignIn, SignUp } from './pages';
+import { Explore, ForgotPassword, Offers, Profile, SignIn, SignUp } from './pages';
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
         </Routes>
